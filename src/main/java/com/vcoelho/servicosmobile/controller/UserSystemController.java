@@ -31,7 +31,7 @@ public class UserSystemController {
 	private final UserSystemService userSystemService;
 
 	@PostMapping
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.OK)
 	public MessageResponseDTO create(@Valid @RequestBody UserSystemDTO userSystemDTO) {
 		return userSystemService.create(userSystemDTO);
 	}
