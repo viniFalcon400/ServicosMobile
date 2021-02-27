@@ -30,26 +30,26 @@ public class UserSystemService {
 	@Autowired
 	private BCryptPasswordEncoder pe;
 
-	public MessageResponseDTO create(UserSystemDTO userSystemDTO) {
+	public UserSystemDTO create(UserSystemDTO userSystemDTO) {
 		UserSystem userSystem = userSystemMapper.toModel(userSystemDTO);
 		userSystem.setSenha(pe.encode(userSystemDTO.getSenha()));
 		UserSystem savedUserSystem = userSystemRepository.save(userSystem);
 
-		MessageResponseDTO messageResponse = createMessageResponse("User successfully created with ID ", savedUserSystem.getId());
+//		MessageResponseDTO messageResponse = createMessageResponse("User successfully created with ID ", savedUserSystem.getId());
 
-		return messageResponse;
+		return userSystemMapper.toDTO(savedUserSystem);
 	}
 
-	public MessageResponseDTO update(Long id, UserSystemDTO userSystemDTO) throws InformationNotFoundException {
+	public UserSystemDTO update(Long id, UserSystemDTO userSystemDTO) throws InformationNotFoundException {
 		userSystemRepository.findById(id).orElseThrow(() -> new InformationNotFoundException(id));
 
 		UserSystem updatedUserSystem = userSystemMapper.toModel(userSystemDTO);
 		updatedUserSystem.setSenha(pe.encode(userSystemDTO.getSenha()));
 		UserSystem savedUserSystem = userSystemRepository.save(updatedUserSystem);
 
-		MessageResponseDTO messageResponse = createMessageResponse("User successfully updated with ID ", savedUserSystem.getId());
+//		MessageResponseDTO messageResponse = createMessageResponse("User successfully updated with ID ", savedUserSystem.getId());
 
-		return messageResponse;
+		return userSystemMapper.toDTO(savedUserSystem);
 	}
 
 	public UserSystemDTO findById(Long id) throws InformationNotFoundException {
@@ -66,9 +66,9 @@ public class UserSystemService {
 				.collect(Collectors.toList());
 	}
 
-	private MessageResponseDTO createMessageResponse(String message, Long id) {
-		return MessageResponseDTO.builder()
-				.message(message + id)
-				.build();
-	}
+//	private MessageResponseDTO createMessageResponse(String message, Long id) {
+//		return MessageResponseDTO.builder()
+//				.message(message + id)
+//				.build();
+//	}
 }

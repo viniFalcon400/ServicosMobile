@@ -32,13 +32,13 @@ public class UserSystemController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
-	public MessageResponseDTO create(@Valid @RequestBody UserSystemDTO userSystemDTO) {
+	public UserSystemDTO create(@Valid @RequestBody UserSystemDTO userSystemDTO) {
 		return userSystemService.create(userSystemDTO);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public MessageResponseDTO update(@PathVariable Long id, @RequestBody @Valid UserSystemDTO userSystemDTO)  throws InformationNotFoundException{
+	public UserSystemDTO update(@PathVariable Long id, @RequestBody @Valid UserSystemDTO userSystemDTO)  throws InformationNotFoundException{
 		return userSystemService.update(id, userSystemDTO);
 	}
 
